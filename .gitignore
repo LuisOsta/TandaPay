@@ -1,0 +1,8 @@
+node_modules
+dev.js
+.DS_Store
+keyfile.json
+env.js
+api
+build
+*.tar.gz

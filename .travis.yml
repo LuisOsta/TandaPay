@@ -1,0 +1,33 @@
+language: node_js
+node_js:
+  - "8"
+dist: trusty
+branches:
+  only:
+    - master
+    - app-stable
+    - api-stable
+services:
+  - mongodb
+env:
+  - NODE_ENV=ci
+cache:
+  directories:
+    - node_modules
+before_install:
+  - openssl aes-256-cbc -K $encrypted_982dce80f7e0_key -iv $encrypted_982dce80f7e0_iv
+    -in config/credentials.tar.gz.enc -out config/credentials.tar.gz -d
+  - tar -C config/ -xzf config/credentials.tar.gz
+  - cat config/env.js
+install:
+  - npm install
+  - npm install truffle -g
+  - npm run build
+script:
+  - npm run test
+deploy:
+  provider: gae
+  skip_cleanup: true
+  keyfile: config/keyfile.json
+  project: peerless-dahlia-229121
+  on: app-stable

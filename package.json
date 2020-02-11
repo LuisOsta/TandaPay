@@ -1,0 +1,58 @@
+{
+	"name": "tanda-pay",
+	"version": "1.0.0",
+	"description": "TandaPay is a supplemental insurance product based off of the concept of shared community finance. TandaPay serves as a means by which communities can cover the cost of an insurance deductible.",
+	"main": "index.js",
+	"engines": {
+		"node": "10.*.*",
+		"npm": "6.*"
+	},
+	"scripts": {
+		"test": "mocha -ui tdd test/**/*.test.js --exit",
+		"start": "export NODE_ENV=production || SET \"NODE_ENV=production\" && node index.js",
+		"server": "nodemon index.js",
+		"client": "npm run start --prefix client",
+		"dev": "npm run truffle-build && concurrently \"npm run server\" \"npm run client\"",
+		"build": "npm install --only-prod --prefix client && npm run truffle-build && npm run build --prefix client",
+		"truffle-build": "truffle build && rm -rf client/src/web3/contracts && mv build/contracts client/src/web3/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LuisOsta/TandaPay.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/LuisOsta/TandaPay/issues"
+	},
+	"homepage": "https://github.com/LuisOsta/TandaPay#readme",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"clsx": "^1.0.4",
+		"cookie-parser": "^1.4.4",
+		"express": "^4.17.1",
+		"helmet": "^3.18.0",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.6.2",
+		"morgan": "^1.9.1",
+		"openzeppelin-solidity": "^2.3.0",
+		"passport": "^0.4.0",
+		"passport-facebook": "^3.0.0",
+		"passport-google-oauth20": "^2.0.0",
+		"truffle-hdwallet-provider": "^1.0.14",
+		"validator": "^11.1.0",
+		"web3": "^1.2.0"
+	},
+	"devDependencies": {
+		"concurrently": "^4.1.1",
+		"expect": "^24.8.0",
+		"faker": "^4.1.0",
+		"mocha": "^6.1.4",
+		"nodemon": "^1.19.1",
+		"set-cookie-parser": "^2.3.5",
+		"supertest": "^4.0.2",
+		"truffle": "^5.0.27",
+		"yargs": "^13.2.4"
+	}
+}
